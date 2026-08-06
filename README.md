@@ -1,82 +1,292 @@
-<div align="center">
-  <a href="https://www.langchain.com/langgraph">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset=".github/images/logo-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset=".github/images/logo-light.svg">
-      <img alt="LangGraph Logo" src=".github/images/logo-dark.svg" width="50%">
-    </picture>
-  </a>
-</div>
+# AgentFabric Runtime
 
-<div align="center">
-  <h3>Low-level orchestration framework for building stateful agents.</h3>
-</div>
+A production-grade framework for orchestrating AI agent workflows with support for planning, execution, memory, tool integration, and enterprise observability.
 
-<div align="center">
-  <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/pypi/l/langgraph" alt="PyPI - License"></a>
-  <a href="https://pypistats.org/packages/langgraph" target="_blank"><img src="https://img.shields.io/pepy/dt/langgraph" alt="PyPI - Downloads"></a>
-  <a href="https://pypi.org/project/langgraph/" target="_blank"><img src="https://img.shields.io/pypi/v/langgraph.svg?label=%20" alt="Version"></a>
-  <a href="https://x.com/langchain_oss" target="_blank"><img src="https://img.shields.io/twitter/url/https/twitter.com/langchain_oss.svg?style=social&label=Follow%20%40LangChain" alt="Twitter / X"></a>
-</div>
+AgentFabric Runtime enables teams to build reliable multi-step AI applications that go beyond simple prompt chains by introducing reusable workflows, intelligent routing, persistent state management, and distributed execution.
 
-<br>
+---
 
-Trusted by companies shaping the future of agents – including Klarna, Replit, Elastic, and more – LangGraph is a low-level orchestration framework for building, managing, and deploying long-running, stateful agents.
+# Features
 
-```bash
-pip install -U langgraph
+- Workflow Orchestration
+- Multi-Agent Collaboration
+- Planner / Executor Architecture
+- Event-Driven Execution
+- Parallel Task Scheduling
+- Conditional Workflow Routing
+- Persistent Workflow State
+- Long-Term Agent Memory
+- Tool Calling
+- Human Approval Gates
+- Automatic Retry Policies
+- Distributed Workers
+- REST API
+- Workflow Monitoring
+- Execution Tracing
+- Authentication
+- Role-Based Access Control
+- Audit Logging
+- Kubernetes Deployment
+- CI/CD Ready
+
+---
+
+# Architecture
+
+```
+                    User Request
+                          │
+                          ▼
+                Workflow Coordinator
+                          │
+        ┌─────────────────┼─────────────────┐
+        │                 │                 │
+        ▼                 ▼                 ▼
+ Planner Agent      Router Engine     Scheduler
+        │                 │                 │
+        └──────────┬──────┴──────────┬──────┘
+                   ▼                 ▼
+            Specialized Agents   Tool Manager
+                   │                 │
+        ┌──────────┼──────────┐      │
+        ▼          ▼          ▼      ▼
+ Search Agent  Coding Agent  Data Agent External APIs
+        │          │          │
+        └──────────┴──────────┘
+                   │
+            Memory Manager
+                   │
+        PostgreSQL + Redis
+                   │
+                   ▼
+           Response Generator
+                   │
+                   ▼
+              Final Response
 ```
 
-> [!TIP]
-> If you're looking to quickly build agents, check out **[Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview)** — a higher-level package built on LangGraph for agents that can plan, use subagents, and leverage file systems for complex tasks.
+---
 
-For an equivalent JS/TS library, check out [LangGraph.js](https://github.com/langchain-ai/langgraphjs) and the [JS docs](https://docs.langchain.com/oss/javascript/langgraph/overview).
+# Technology Stack
 
-## Why use LangGraph?
+## Backend
 
-LangGraph provides low-level supporting infrastructure for *any* long-running, stateful workflow or agent:
+- Python
+- FastAPI
+- AsyncIO
 
-- **[Durable execution](https://docs.langchain.com/oss/python/langgraph/durable-execution)** — Build agents that persist through failures and can run for extended periods, automatically resuming from exactly where they left off.
-- **[Human-in-the-loop](https://docs.langchain.com/oss/python/langgraph/interrupts)** — Seamlessly incorporate human oversight by inspecting and modifying agent state at any point during execution.
-- **[Comprehensive memory](https://docs.langchain.com/oss/python/langgraph/memory)** — Create truly stateful agents with both short-term working memory for ongoing reasoning and long-term persistent memory across sessions.
-- **[Debugging with LangSmith](https://www.langchain.com/langsmith)** — Gain deep visibility into complex agent behavior with visualization tools that trace execution paths, capture state transitions, and provide detailed runtime metrics.
-- **[Production-ready deployment](https://docs.langchain.com/langsmith/deployments)** — Deploy sophisticated agent systems confidently with scalable infrastructure designed to handle the unique challenges of stateful, long-running workflows.
+## AI Frameworks
 
-> [!TIP]
-> For developing, debugging, and deploying AI agents and LLM applications, see [LangSmith](https://docs.langchain.com/langsmith/home).
+- OpenAI SDK
+- Anthropic SDK
+- LlamaIndex
+- LiteLLM
 
-## LangGraph ecosystem
+## Databases
 
-While LangGraph can be used standalone, it also integrates seamlessly with any LangChain product, giving developers a full suite of tools for building agents.
+- PostgreSQL
+- Redis
 
-To improve your LLM application development, pair LangGraph with:
+## Queue
 
-- [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) – Build agents that can plan, use subagents, and leverage file systems for complex tasks.
-- [LangChain](https://docs.langchain.com/oss/python/langchain/overview) – Provides integrations and composable components to streamline LLM application development.
-- [LangSmith](https://www.langchain.com/langsmith) – Helpful for agent evals and observability. Debug poor-performing LLM app runs, evaluate agent trajectories, gain visibility in production, and improve performance over time.
-- [LangSmith Deployment](https://docs.langchain.com/langsmith/deployments) – Deploy and scale agents effortlessly with a purpose-built deployment platform for long-running, stateful workflows. Discover, reuse, configure, and share agents across teams – and iterate quickly with visual prototyping in [LangSmith Studio](https://docs.langchain.com/langsmith/studio).
+- Celery
+- RabbitMQ
+
+## Infrastructure
+
+- Docker
+- Kubernetes
+- GitHub Actions
+
+## Monitoring
+
+- Prometheus
+- Grafana
+- OpenTelemetry
 
 ---
 
-## Documentation
+# Folder Structure
 
-- [docs.langchain.com](https://docs.langchain.com/oss/python/langgraph/overview) – Comprehensive documentation, including conceptual overviews and guides
-- [reference.langchain.com/python/langgraph](https://reference.langchain.com/python/langgraph) – API reference docs for LangGraph packages
-- [LangGraph Quickstart](https://docs.langchain.com/oss/python/langgraph/quickstart) – Get started building with LangGraph
-- [Chat LangChain](https://chat.langchain.com/) – Chat with the LangChain documentation and get answers to your questions
+```
+agentfabric-runtime/
 
-**Discussions**: Visit the [LangChain Forum](https://forum.langchain.com) to connect with the community and share all of your technical questions, ideas, and feedback.
-
-## Additional resources
-
-- **[Guides](https://docs.langchain.com/oss/python/learn)** – Quick, actionable code snippets for topics such as streaming, adding memory & persistence, and design patterns (e.g. branching, subgraphs, etc.).
-- **[LangChain Academy](https://academy.langchain.com/courses/intro-to-langgraph)** – Learn the basics of LangGraph in our free, structured course.
-- **[Case studies](https://www.langchain.com/built-with-langgraph)** – Hear how industry leaders use LangGraph to ship AI applications at scale.
-- [Contributing Guide](https://docs.langchain.com/oss/python/contributing/overview) – Learn how to contribute to LangChain projects and find good first issues.
-- [Code of Conduct](https://github.com/langchain-ai/langchain/?tab=coc-ov-file) – Our community guidelines and standards for participation.
+├── api/
+├── agents/
+├── workflows/
+├── scheduler/
+├── planner/
+├── executor/
+├── memory/
+├── routing/
+├── tools/
+├── integrations/
+├── monitoring/
+├── authentication/
+├── configs/
+├── workers/
+├── deployment/
+├── docs/
+├── tests/
+└── README.md
+```
 
 ---
 
-## Acknowledgements
+# Core Modules
 
-LangGraph is inspired by [Pregel](https://research.google/pubs/pub37252/) and [Apache Beam](https://beam.apache.org/). The public interface draws inspiration from [NetworkX](https://networkx.org/documentation/latest/). LangGraph is built by LangChain Inc, the creators of LangChain, but can be used without LangChain.
+## Workflow Engine
+
+- Directed workflow execution
+- State transitions
+- Conditional routing
+- Checkpoint recovery
+
+## Agent Runtime
+
+- Planner Agent
+- Executor Agent
+- Research Agent
+- Validation Agent
+- Supervisor Agent
+
+## Memory System
+
+- Conversation history
+- Long-term memory
+- Semantic retrieval
+- Session persistence
+
+## Tool Integration
+
+- REST APIs
+- SQL Databases
+- Web Search
+- Python Execution
+- File Processing
+- Vector Databases
+
+## Monitoring
+
+- Execution timeline
+- Workflow metrics
+- Failure diagnostics
+- Token usage
+- Cost tracking
+- Performance dashboards
+
+---
+
+# REST API
+
+### Start Workflow
+
+```
+POST /api/v1/workflows/run
+```
+
+### Workflow Status
+
+```
+GET /api/v1/workflows/{id}
+```
+
+### Workflow History
+
+```
+GET /api/v1/workflows/history
+```
+
+### Registered Agents
+
+```
+GET /api/v1/agents
+```
+
+### Health Check
+
+```
+GET /health
+```
+
+### Metrics
+
+```
+GET /metrics
+```
+
+---
+
+# Example Workflow
+
+```
+User Question
+      │
+      ▼
+Planner Agent
+      │
+      ▼
+Task Router
+      │
+ ┌────┴────┐
+ ▼         ▼
+Research  Database
+ Agent     Agent
+ └────┬────┘
+      ▼
+Validation Agent
+      │
+      ▼
+Response Generator
+```
+
+---
+
+# Deployment
+
+### Local Development
+
+```bash
+docker compose up --build
+```
+
+### Production
+
+```bash
+kubectl apply -f deployment/
+```
+
+---
+
+# Roadmap
+
+- Workflow Visual Designer
+- Distributed Agent Clusters
+- Streaming Workflow Execution
+- Multi-Tenant Architecture
+- Workflow Versioning
+- AI Cost Optimization
+- Built-in Evaluation Suite
+- Plugin Marketplace
+- Enterprise Dashboard
+- Workflow Templates
+
+---
+
+# Testing
+
+```bash
+pytest tests/
+```
+
+---
+
+# License
+
+MIT License
+
+---
+
+# Author
+
+AgentFabric Runtime Contributors
